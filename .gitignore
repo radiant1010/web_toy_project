@@ -47,6 +47,10 @@ build/Release
 node_modules/
 jspm_packages/
 test_page/
+
+#시스템정보 업로드 안함
+server/config/
+
 # Snowpack dependency directory (https://snowpack.dev/)
 web_modules/
 
