@@ -64,7 +64,9 @@ router.post("/login", (req, res) => {
     bcrypt.compare(password, user.password).then((isMatch) => {
       if (isMatch) {
         //user이라는 session 객체를 생성(필요한 정보는 여기에 담아준다.)
+        console.log("user정보 :", user);
         req.session.user = {
+          user_id: user.user_id,
           user_email: user.email,
           user_name: user.name,
         }
@@ -90,7 +92,8 @@ router.delete('/logout', function (req, res) {
   }
 });
 
-router.patch('/mypage', function (req, res) {
+//마이페이지(URL 수정)
+router.patch('/mypage/:id', function (req, res) {
   const session = req.session;
   const { user_name } = req.body;
 
@@ -105,5 +108,17 @@ router.patch('/mypage', function (req, res) {
       });
   }
 });
+
+//로그인 체크
+router.get('/loginCheck', (req,res) =>{
+  console.log("세션 정보", req.session);
+  
+  if(req.session.user){
+      res.send({ status: 200,  user: req.session.user})
+  }else{
+      res.send({ status: 404 })
+  }
+});
+
 
 module.exports = router;
