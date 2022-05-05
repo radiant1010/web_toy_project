@@ -24,6 +24,7 @@ app.use(session({
   secret: 'Fur_SEAL',
   resave: false,
   store: sessionStore,
+  cookie: { maxAge : 600000 },
   saveUninitialized: false
 }))
 //### express-session 설정 end ###
